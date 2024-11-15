@@ -20,6 +20,7 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.WindowCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -49,29 +50,5 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.getColor(applicationContext, android.R.color.transparent)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        /*binding.statusBarShade.setBackgroundColor(
-            getColorWithOpacity(
-                MaterialColors.getColor(
-                    binding.root,
-                    com.google.android.material.R.attr.colorSurface
-                ),
-                0.9f
-            )
-        )
-
-        binding.navigationBarShade.setBackgroundColor(
-            getColorWithOpacity(
-                MaterialColors.getColor(
-                    binding.root,
-                    com.google.android.material.R.attr.colorSurface
-                ),
-                0.9f
-            )
-        ) */
-
-        instance = this
-
-        // setInsets()
     }
 }
