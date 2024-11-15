@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ApexEmu</string>
+    <string name="about">ABOUT</string>
+    <string name="create_container">Create</string>
+    <string name="appearance">Appearance</string>
+    <string name="enable_dynamic_colors">Enable Dynamic Colors</string>
+    <string name="enable_dynamic_colors_desc">Dynamic colors will be used</string>
+    <string name="delete_container">Delete</string>
+</resources>

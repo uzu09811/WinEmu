@@ -1,0 +1,156 @@
+name: notify-release-build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get Previous Tag
+        id: get_previous_tag
+        run: |
+          previous_tag=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
+          echo "::set-output name=previous_tag::$previous_tag"
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILD }}
+
+      - name: Determine New Tag
+        id: determine_new_tag
+        run: |
+          previous_tag=${{ steps.get_previous_tag.outputs.previous_tag }}
+          IFS='.' read -r -a version_parts <<< "$previous_tag"
+
+          major=${version_parts[0]}
+          minor=${version_parts[1]}
+          patch=${version_parts[2]}
+
+          if [ "$patch" -ge 12 ]; then
+            minor=$((minor + 1))
+            patch=0
+          else
+            patch=$((patch + 1))
+          fi
+
+          new_tag="$major.$minor.$patch"
+          echo "::set-output name=new_tag::$new_tag"
+
+      - name: Delete Previous Releases
+        run: |
+          for release in $(gh release list --limit 100 --json tagName --jq '.[].tagName'); do
+            gh release delete $release --yes
+          done
+          for tag in $(git tag); do
+            git push --delete origin $tag
+            git tag -d $tag
+          done
+        shell: /usr/bin/bash -e {0}
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILD }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILD }}
+        with:
+          tag_name: ${{ steps.determine_new_tag.outputs.new_tag }}
+          release_name: Troppical ${{ steps.determine_new_tag.outputs.new_tag }}
+          draft: false
+          prerelease: false
+
+      - name: Save Upload URL
+        run: echo "${{ steps.create_release.outputs.upload_url }}" > upload_url.txt
+
+      - name: Upload upload_URL Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: upload-url
+          path: upload_url.txt
+          
+  Android-build:
+    needs: [create-release]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Decode and save keystore
+        env:
+         ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+        run: |
+         echo "$ANDROID_KEYSTORE_B64" | base64 --decode > ${{ github.workspace }}/android/app/ks.jks
+      
+      - name: Build with Gradle
+        run: |
+          cd android/
+          chmod +x gradlew
+          ./gradlew assembleRelease
+          cd ../..
+        env:
+          ANDROID_KEYSTORE_FILE: ks.jks
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+          GITHUB_TOKEN: ${{ secrets.BUILD }}
+        
+
+      - name: Upload Android Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: notify-android
+          path: ./android/app/build/outputs/apk/release/app-release.apk
+  
+  upload-release-artifacts:
+    needs: [Android-build, create-release]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  
+
+      - name: Setup build directories
+        run: |
+          mkdir -p extracted/
+          mkdir -p extracted/
+
+      - name: Download notify-android
+        uses: actions/download-artifact@v4
+        with:
+          name: troppical-android
+          path: ./extracted/
+
+      - name: Download Upload URL Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: upload-url
+          path: .
+
+      - name: Read Upload URL
+        id: read_upload_url
+        run: |
+          upload_url=$(cat upload_url.txt)
+          echo "::set-output name=upload_url::$upload_url"
+
+      - name: Upload Release Asset notify-android
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.BUILD }}
+        with:
+          upload_url: ${{ steps.read_upload_url.outputs.upload_url }}
+          asset_path: ./extracted/app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
