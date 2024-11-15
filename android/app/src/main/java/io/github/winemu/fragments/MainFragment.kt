@@ -76,14 +76,14 @@ class MainFragment : Fragment() {
     private fun refreshSongs() {
         binding.swipeRefresh.isRefreshing = true     
         animateGridView()
-        binding.gridContainer.adapter = null
+        binding.gridContainers.adapter = null
         binding.swipeRefresh.isRefreshing = false
     }
 
     private fun animateGridView() {
-        binding.gridContainer.alpha = 0f
+        binding.gridContainers.alpha = 0f
     
-        binding.gridContainer.animate()
+        binding.gridContainers.animate()
             .alpha(1f)
             .setDuration(500)
             .setInterpolator(android.view.animation.AccelerateDecelerateInterpolator()) // Smooth transition
@@ -100,7 +100,7 @@ class MainFragment : Fragment() {
             val spacingNavigation = resources.getDimensionPixelSize(R.dimen.spacing_navigation)
             val spacingNavigationRail = resources.getDimensionPixelSize(R.dimen.spacing_navigation_rail)
 
-            binding.gridContainer.updatePadding(
+            binding.gridContainers.updatePadding(
                 top = extraListSpacing,
                 bottom = barInsets.bottom + spacingNavigation + extraListSpacing
             )
