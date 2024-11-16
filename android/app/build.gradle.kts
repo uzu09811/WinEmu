@@ -91,6 +91,7 @@ dependencies {
     implementation("androidx.palette:palette:1.0.0")
     implementation(files("libs/win-debug.aar"))
     implementation("org.apache.commons:commons-compress:1.20")
+    implementation("org.tukaani:xz:1.7")
 }
 
 fun getVersionName(): String {
