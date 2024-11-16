@@ -45,6 +45,11 @@ jobs:
         run: |
           is_pr=${{ github.event_name == 'pull_request' }}
           echo "::set-output name=is_pr::$is_pr"
+
+      - name: Setup libs
+        run: |
+            wget -P app/libs \
+            https://github.com/uzu09811/winlator-lib/releases/download/debug/win-debug.aar
       
       - name: Build with Gradle
         run: |
