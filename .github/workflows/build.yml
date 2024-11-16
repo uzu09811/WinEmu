@@ -48,7 +48,7 @@ jobs:
 
       - name: Setup libs
         run: |
-            wget -P app/libs \
+            wget -P android/app/libs \
             https://github.com/uzu09811/winlator-lib/releases/download/debug/win-debug.aar
       
       - name: Build with Gradle
