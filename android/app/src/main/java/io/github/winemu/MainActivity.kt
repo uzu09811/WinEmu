@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        if (!requestAppPermissions()) ImageFsInstaller.installIfNeeded(this as WinActivity)
+        if (!requestAppPermissions()) ImageFsInstaller.installIfNeeded(this)
     }
 
     private fun requestAppPermissions(): Boolean {
