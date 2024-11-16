@@ -36,10 +36,11 @@ import com.winlator.MainActivity as WinActivity
 import kotlin.math.roundToInt
 import java.io.File
 
+private const val PERMISSION_WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
-    private const val PERMISSION_WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
