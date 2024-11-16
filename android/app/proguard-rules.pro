@@ -34,5 +34,6 @@
 
 # Keep all classes in the Apache Commons Compress package
 -keep class org.apache.commons.compress.** { *; }
+-dontwarn org.apache.commons.compress.**
 -keep class org.apache.commons.compress.archivers.** { *; }
 -keep class org.apache.commons.compress.compressors.** { *; }
