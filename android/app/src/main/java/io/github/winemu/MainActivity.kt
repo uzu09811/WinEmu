@@ -14,6 +14,8 @@ import android.view.ViewTreeObserver
 import androidx.core.view.ViewCompat
 import androidx.core.app.ActivityCompat
 import android.graphics.drawable.ColorDrawable
+import android.Manifest
+import android.content.pm.PackageManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import android.widget.GridView
@@ -30,6 +32,7 @@ import io.github.winemu.R
 import io.github.winemu.fragments.MainFragment
 import io.github.winemu.databinding.MainActivityBinding
 import com.winlator.xenvironment.ImageFsInstaller
+import com.winlator.MainActivity as WinActivity
 import kotlin.math.roundToInt
 import java.io.File
 
@@ -53,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        if (!requestAppPermissions()) ImageFsInstaller.installIfNeeded(this)
+        if (!requestAppPermissions()) ImageFsInstaller.installIfNeeded(this as WinActivity)
     }
 
     private fun requestAppPermissions(): Boolean {
