@@ -90,6 +90,7 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("androidx.palette:palette:1.0.0")
     implementation(files("libs/win-debug.aar"))
+    implementation("org.apache.commons:commons-compress:1.20")
 }
 
 fun getVersionName(): String {
