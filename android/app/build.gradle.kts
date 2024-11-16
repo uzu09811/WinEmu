@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         applicationId = "io.github.winemu"
-        minSdk = 29
-        targetSdk = 34
+        minSdk = 21
+        targetSdk = 28
         versionCode = 1
         versionName = "1.0.0"
 
@@ -85,6 +85,7 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.preference:preference-ktx:1.2.1")
     implementation("androidx.palette:palette:1.0.0")
+    implementation(files("libs/win-debug.aar"))
 }
 
 fun getVersionName(): String {
