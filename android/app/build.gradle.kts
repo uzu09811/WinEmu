@@ -62,6 +62,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    lintOptions {
+        disable("ExpiredTargetSdkVersion") // Disable the lint check for expired target SDK
+    }
 }
 
 dependencies {
