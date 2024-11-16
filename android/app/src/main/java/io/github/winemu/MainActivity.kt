@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewTreeObserver
 import androidx.core.view.ViewCompat
+import androidx.core.app.ActivityCompat
 import android.graphics.drawable.ColorDrawable
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -28,6 +29,7 @@ import com.google.android.material.color.MaterialColors
 import io.github.winemu.R
 import io.github.winemu.fragments.MainFragment
 import io.github.winemu.databinding.MainActivityBinding
+import com.winlator.xenvironment.ImageFsInstaller
 import kotlin.math.roundToInt
 import java.io.File
 
@@ -50,5 +52,21 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.getColor(applicationContext, android.R.color.transparent)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        if (!requestAppPermissions()) ImageFsInstaller.installIfNeeded(this)
     }
+
+    private fun requestAppPermissions(): Boolean {
+        return if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            false
+        } else {
+            val permissions = arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
+            true
+        }
+    }  
 }
