@@ -27,6 +27,12 @@
 -keep class h2.a { *; }
 
 -keep class io.github.winemu.** {*;}
+-keep class com.winlator.** {*;}
 
 -keep class io.ktor.** { *; }
 -dontwarn io.ktor.**
+
+# Keep all classes in the Apache Commons Compress package
+-keep class org.apache.commons.compress.** { *; }
+-keep class org.apache.commons.compress.archivers.** { *; }
+-keep class org.apache.commons.compress.compressors.** { *; }
