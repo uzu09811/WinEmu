@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import io.github.winemu.R
 import com.winlator.container.Container
 
 class ContainerAdapter(
