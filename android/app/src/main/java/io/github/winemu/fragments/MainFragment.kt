@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.GridView
+import androidx.recyclerview.widget.GridLayoutManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.activity.result.ActivityResultLauncher
@@ -23,6 +23,8 @@ import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.winemu.R
 import io.github.winemu.databinding.MainFragmentBinding
+import io.github.winemu.adapters.ContainerAdapter
+import com.winlator.container.ContainerManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,7 +52,7 @@ class MainFragment : Fragment() {
 
         binding.swipeRefresh.apply {
             setOnRefreshListener {
-                refreshSongs()
+                refreshContainers()
             }
             setProgressBackgroundColorSchemeColor(
                 MaterialColors.getColor(
@@ -68,15 +70,19 @@ class MainFragment : Fragment() {
 
         setInsets()
             
-        refreshSongs()
+        refreshContainers()
 
         return binding.root
     }
 
-    private fun refreshSongs() {
+    private fun refreshContainers() {
         binding.swipeRefresh.isRefreshing = true     
         animateGridView()
-        binding.gridContainers.adapter = null
+        binding.gridContainers.layoutManager = GridLayoutManager(requireContext(), 2)
+        val containers = ContainerManager(requireContext()).getContainers()
+        binding.gridContainers.adapter = ContainerAdapter(containers) { item ->
+            // Handle container click
+        }
         binding.swipeRefresh.isRefreshing = false
     }
 
