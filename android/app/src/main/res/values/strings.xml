@@ -6,4 +6,5 @@
     <string name="enable_dynamic_colors">Enable Dynamic Colors</string>
     <string name="enable_dynamic_colors_desc">Dynamic colors will be used</string>
     <string name="delete_container">Delete</string>
+    <string name="configurations">Configurations</string>
 </resources>
