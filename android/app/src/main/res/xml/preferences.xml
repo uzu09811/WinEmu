@@ -6,27 +6,27 @@
         app:iconSpaceReserved="false">
         <io.github.winemu.preferences.IntegerListPreference
             android:key="screen_size"
-            android:title="@com.win_lib:string/screen_size"
-            android:entries="@com.win_lib:array/screen_size_entries"
-            android:dialogTitle="@com.win_lib:string/screen_size"
+            android:title="@com.win_lib.R.string/screen_size"
+            android:entries="@com.win_lib.R.array/screen_size_entries"
+            android:dialogTitle="@com.win_lib.R.string/screen_size"
             app:iconSpaceReserved="false" />
         <io.github.winemu.preferences.IntegerListPreference
             android:key="wine_version"
-            android:title="@com.win_lib:string/wine_version"
-            android:entries="@com.win_lib:array/wine_version_entries"
-            android:dialogTitle="@com.win_lib:string/wine_version"
+            android:title="@com.win_lib.R.string/wine_version"
+            android:entries="@com.win_lib.R.array/wine_version_entries"
+            android:dialogTitle="@com.win_lib.R.string/wine_version"
             app:iconSpaceReserved="false" />
         <io.github.winemu.preferences.IntegerListPreference
             android:key="graphics_driver"
-            android:title="@com.win_lib:string/graphics_driver"
-            android:entries="@com.win_lib:array/graphics_driver_entries"
-            android:dialogTitle="@com.win_lib:string/graphics_driver"
+            android:title="@com.win_lib.R.string/graphics_driver"
+            android:entries="@com.win_lib.R.array/graphics_driver_entries"
+            android:dialogTitle="@com.win_lib.R.string/graphics_driver"
             app:iconSpaceReserved="false" />
         <io.github.winemu.preferences.IntegerListPreference
             android:key="audio_driver"
-            android:title="@com.win_lib:string/audio_driver"
-            android:entries="@com.win_lib:array/audio_driver_entries"
-            android:dialogTitle="@com.win_lib:string/audio_driver"
+            android:title="@com.win_lib.R.string/audio_driver"
+            android:entries="@com.win_lib.R.array/audio_driver_entries"
+            android:dialogTitle="@com.win_lib.R.string/audio_driver"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
