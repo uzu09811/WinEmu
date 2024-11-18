@@ -1,4 +1,4 @@
-package io.github.notify.fragments
+package io.github.winemu.fragments
 
 import android.os.Bundle
 import androidx.preference.Preference
