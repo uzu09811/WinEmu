@@ -23,6 +23,9 @@
         <item>ALSA</item>
         <item>PulseAudio</item>
     </string-array>
+    <string-array name="wine_version_entries">
+        <item>wine-9.16-custom</item>
+    </string-array>
     <string-array name="binding_type_entries">
         <item>Keyboard</item>
         <item>Mouse</item>
