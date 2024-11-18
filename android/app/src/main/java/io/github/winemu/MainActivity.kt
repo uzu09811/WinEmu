@@ -31,8 +31,8 @@ import com.google.android.material.color.MaterialColors
 import io.github.winemu.R
 import io.github.winemu.fragments.MainFragment
 import io.github.winemu.databinding.MainActivityBinding
-import com.winlator.xenvironment.ImageFsInstaller
-import com.winlator.MainActivity as WinActivity
+import com.win_lib.xenvironment.ImageFsInstaller
+import com.win_lib.MainActivity as WinActivity
 import kotlin.math.roundToInt
 import java.io.File
 

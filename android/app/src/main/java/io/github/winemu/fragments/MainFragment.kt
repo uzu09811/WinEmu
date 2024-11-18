@@ -24,7 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.winemu.R
 import io.github.winemu.databinding.MainFragmentBinding
 import io.github.winemu.adapters.ContainerAdapter
-import com.winlator.container.ContainerManager
+import com.win_lib.container.ContainerManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

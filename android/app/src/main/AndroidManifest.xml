@@ -47,14 +47,14 @@
 
         <!-- Add the required activities from the AAR -->
         <activity
-            android:name="com.winlator.MainActivity"
+            android:name="com.win_lib.MainActivity"
             android:theme="@style/AppTheme"
             android:exported="true"
             android:screenOrientation="sensor"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|density|navigation" />
         
         <activity
-            android:name="com.winlator.XServerDisplayActivity"
+            android:name="com.win_lib.XServerDisplayActivity"
             android:exported="false"
             android:theme="@style/AppThemeFullscreen"
             android:launchMode="singleTask"
@@ -63,7 +63,7 @@
             android:screenOrientation="sensorLandscape" />
 
         <activity
-            android:name="com.winlator.XrActivity"
+            android:name="com.win_lib.XrActivity"
             android:configChanges="density|orientation|screenSize|keyboard|keyboardHidden|uiMode"
             android:exported="true"
             android:launchMode="singleTask"
@@ -73,20 +73,20 @@
             android:theme="@style/AppThemeFullscreen" />
 
         <activity
-            android:name="com.winlator.ControlsEditorActivity"
+            android:name="com.win_lib.ControlsEditorActivity"
             android:exported="false"
             android:theme="@style/AppThemeFullscreen"
             android:screenOrientation="sensor" />
 
         <activity
-            android:name="com.winlator.ExternalControllerBindingsActivity"
+            android:name="com.win_lib.ExternalControllerBindingsActivity"
             android:theme="@style/AppTheme"
             android:exported="false"
             android:screenOrientation="sensor" />
 
         <!-- Add the required provider -->
         <provider
-            android:name="com.winlator.core.WinlatorFilesProvider"
+            android:name="com.win_lib.core.WinlatorFilesProvider"
             android:authorities="com.winlator.core.WinlatorFilesProvider"
             android:exported="true"
             android:grantUriPermissions="true"
