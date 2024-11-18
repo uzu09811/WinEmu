@@ -11,12 +11,14 @@ import io.github.winemu.fragments.BasePreferenceFragment
 
 class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment.OnIntegerValueChangeListener {
 
+    private lateinit var container: Container
+    
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
-        arguments?.let {
-            container = it.getSerializable(ARG_CONTAINER) as Container
-        }
-        // add configurations
+        setIntegerValueChangeListener("screen_size", this)
+        setIntegerValueChangeListener("wine_version", this)
+        setIntegerValueChangeListener("graphics_driver", this)
+        setIntegerValueChangeListener("audio_driver", this)
         refresh()
     }
 
@@ -31,16 +33,23 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun refresh() {
-        // add configurations
+        val graphicsDriver = when (container.DEFAULT_GRAPHICS_DRIVER) {
+            "turnip" -> 0
+            "virgl-23.1.9" -> 1
+            else -> null
+        }
+        val audioDriver = when (container.DEFAULT_AUDIO_DRIVER) {
+            "alsa" -> 0
+            "pulseaudio" -> 1
+            else -> null
+        }
+        setIntegerValue("screen_size", 0)
+        setIntegerValue("wine_version", 0)
+        setIntegerValue("graphics_driver", graphicsDriver!!)
+        setIntegerValue("audio_driver", audioDriver!!)
     }
 
-    companion object {
-        fun newInstance(container: Container): ContainerDetailFragment {
-            val fragment = ContainerDetailFragment()
-            val args = Bundle()
-            args.putSerializable(ARG_CONTAINER, container)
-            fragment.arguments = args
-            return fragment
-        }
+    fun setContainer(container: Container) {
+        container = container
     }
 }
