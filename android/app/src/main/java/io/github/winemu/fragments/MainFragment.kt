@@ -25,6 +25,7 @@ import io.github.winemu.R
 import io.github.winemu.databinding.MainFragmentBinding
 import io.github.winemu.adapters.ContainerAdapter
 import com.win_lib.container.ContainerManager
+import com.win_lib.container.Container
 import com.win_lib.XrActivity
 import com.win_lib.XServerDisplayActivity
 import kotlinx.coroutines.Dispatchers
@@ -90,11 +91,14 @@ class MainFragment : Fragment() {
 
     private fun runContainer(container: Container) {
         if (!XrActivity.isEnabled(requireContext())) {
-            val intent: Intent = Intent(requireContext(), com.win_lib.XServerDisplayActivity.class)
+            val intent = Intent(requireContext(), XServerDisplayActivity::class.java)
             intent.putExtra("container_id", container.id)
             requireActivity().startActivity(intent)
-        } else XrActivity.openIntent(requireActivity(), container.id, null)
+        } else {
+            XrActivity.openIntent(requireActivity(), container.id, null)
+        }
     }
+
 
     private fun animateGridView() {
         binding.gridContainers.alpha = 0f
