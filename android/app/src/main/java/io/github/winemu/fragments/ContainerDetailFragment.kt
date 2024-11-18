@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.preference.Preference
 import io.github.winemu.preferences.IntegerListPreference
 import androidx.preference.SwitchPreferenceCompat
-import io.github.notify.R
-import io.github.notify.MainActivity
-import io.github.notify.fragments.BasePreferenceFragment
+import io.github.winemu.R
+import io.github.winemu.MainActivity
+import io.github.winemu.fragments.BasePreferenceFragment
 
 class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment.OnIntegerValueChangeListener {
 
