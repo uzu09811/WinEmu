@@ -15,6 +15,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
+        configureToolbar()
         setIntegerValueChangeListener("screen_size", this)
         setIntegerValueChangeListener("wine_version", this)
         setIntegerValueChangeListener("graphics_driver", this)
@@ -51,5 +52,12 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     fun setContainer(newContainer: Container) {
         container = newContainer
+    }
+
+    private fun configureToolbar() {
+        (requireActivity() as MainActivity).setSupportActionBar(view.findViewById(R.id.toolbar))
+	    (requireActivity() as MainActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as MainActivity).getSupportActionBar()?.title = "New Container"
+        (requireActivity() as MainActivity).setToolbarVisibility(true)
     }
 }
