@@ -61,7 +61,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun configureToolbar() {
-        (requireActivity() as MainActivity).setSupportActionBar(view.findViewById(R.id.toolbar))
+        (requireActivity() as MainActivity).setSupportActionBar((requireActivity() as MainActivity).findViewById(R.id.toolbar))
 	(requireActivity() as MainActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         (requireActivity() as MainActivity).getSupportActionBar()?.title = "New Container"
         (requireActivity() as MainActivity).setToolbarVisibility(true)
