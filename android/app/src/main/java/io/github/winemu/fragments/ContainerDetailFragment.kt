@@ -31,8 +31,14 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     override fun onResume() {
         super.onResume()
+	configureToolbar()
     }
 
+    override fun onDestroyView() {
+	super.onDestroyView()
+        (requireActivity() as MainActivity).setToolbarVisibility(false)
+    }
+	    
     private fun refresh() {
         val graphicsDriver = when (Container.DEFAULT_GRAPHICS_DRIVER) {
             "turnip" -> 0
@@ -56,7 +62,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     private fun configureToolbar() {
         (requireActivity() as MainActivity).setSupportActionBar(view.findViewById(R.id.toolbar))
-	    (requireActivity() as MainActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+	(requireActivity() as MainActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         (requireActivity() as MainActivity).getSupportActionBar()?.title = "New Container"
         (requireActivity() as MainActivity).setToolbarVisibility(true)
     }
