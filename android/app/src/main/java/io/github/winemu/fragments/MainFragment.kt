@@ -21,9 +21,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import io.github.winemu.R
 import io.github.winemu.databinding.MainFragmentBinding
 import io.github.winemu.adapters.ContainerAdapter
+import io.github.winemu.fragments.ContainerDetailFragment
 import com.win_lib.container.ContainerManager
 import com.win_lib.container.Container
 import com.win_lib.XrActivity
@@ -39,7 +41,6 @@ import java.io.IOException
 import java.net.UnknownHostException
 
 class MainFragment : Fragment() {
-
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -149,5 +150,14 @@ class MainFragment : Fragment() {
             binding.swipeRefresh.layoutParams = mlpSwipe
             
             windowInsets
+        }
+
+        private fun setupContainerFab() {
+            (requireActivity() as MainActivity).findViewById<ExtendedFloatingActionButton>(R.id.create_container).setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, ContainerDetailFragment(), "CONTAINER_DETAIL_FRAGMENT_TAG")
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
 }
