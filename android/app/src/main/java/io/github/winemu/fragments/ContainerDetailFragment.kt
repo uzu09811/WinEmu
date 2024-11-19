@@ -33,12 +33,12 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun refresh() {
-        val graphicsDriver = when (container.DEFAULT_GRAPHICS_DRIVER) {
+        val graphicsDriver = when (Container.DEFAULT_GRAPHICS_DRIVER) {
             "turnip" -> 0
             "virgl-23.1.9" -> 1
             else -> 0
         }
-        val audioDriver = when (container.DEFAULT_AUDIO_DRIVER) {
+        val audioDriver = when (Container.DEFAULT_AUDIO_DRIVER) {
             "alsa" -> 0
             "pulseaudio" -> 1
             else -> 0
