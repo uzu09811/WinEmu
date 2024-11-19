@@ -30,11 +30,15 @@ class IntegerListPreference @JvmOverloads constructor(
             val entryValuesId = a.getResourceId(1, 0)
             if (entryValuesId != 0) {
                 entryValues = context.resources.getIntArray(entryValuesId).toTypedArray()
+            } else if (entries.isNotEmpty()) {
+                // Auto-generate entryValues as indices if not provided
+                entryValues = Array(entries.size) { it }
             }
         } finally {
             a.recycle()
         }
     }
+
 
     var value: Int
         get() = selectedValue
