@@ -26,6 +26,7 @@ import io.github.winemu.R
 import io.github.winemu.databinding.MainFragmentBinding
 import io.github.winemu.adapters.ContainerAdapter
 import io.github.winemu.fragments.ContainerDetailFragment
+import io.github.winemu.MainActivity
 import com.win_lib.container.ContainerManager
 import com.win_lib.container.Container
 import com.win_lib.XrActivity
@@ -45,7 +46,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)     
+        super.onCreate(savedInstanceState) 
     }
 
     override fun onCreateView(
@@ -72,11 +73,18 @@ class MainFragment : Fragment() {
             )
         }
 
+        setupContainerFab()
+
         setInsets()
             
         refreshContainers()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupContainerFab()
     }
 
     private fun refreshContainers() {
