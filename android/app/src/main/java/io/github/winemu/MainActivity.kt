@@ -26,6 +26,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.WindowCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.color.MaterialColors
 import io.github.winemu.R
@@ -76,10 +78,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setToolbarVisibility(visible: Boolean) {
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(binding.coordinatorMain)
         if (visible) {
             binding.appBarLayout.visibility = View.VISIBLE
+            constraintSet.connect(
+                R.id.fragment_container,
+                ConstraintSet.TOP,
+                R.id.appBarLayout,
+                ConstraintSet.BOTTOM
+            )
         } else {
             binding.appBarLayout.visibility = View.GONE
+            constraintSet.connect(
+                R.id.fragment_container,
+                ConstraintSet.TOP,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.TOP
+            )
         }
+        constraintSet.applyTo(binding.coordinatorMain)
     }
 }
