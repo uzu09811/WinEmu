@@ -36,20 +36,20 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         val graphicsDriver = when (container.DEFAULT_GRAPHICS_DRIVER) {
             "turnip" -> 0
             "virgl-23.1.9" -> 1
-            else -> null
+            else -> 0
         }
         val audioDriver = when (container.DEFAULT_AUDIO_DRIVER) {
             "alsa" -> 0
             "pulseaudio" -> 1
-            else -> null
+            else -> 0
         }
         setIntegerValue("screen_size", 0)
         setIntegerValue("wine_version", 0)
-        setIntegerValue("graphics_driver", graphicsDriver!!)
-        setIntegerValue("audio_driver", audioDriver!!)
+        setIntegerValue("graphics_driver", graphicsDriver)
+        setIntegerValue("audio_driver", audioDriver)
     }
 
-    fun setContainer(container: Container) {
-        container = container
+    fun setContainer(newContainer: Container) {
+        container = newContainer
     }
 }
