@@ -73,5 +73,13 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, permissions, PERMISSION_WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
             true
         }
-    }  
+    }
+
+    fun setToolbarVisibility(visible: Boolean) {
+        if (visible) {
+            binding.appBarLayout.visibility = View.VISIBLE
+        } else {
+            binding.appBarLayout.visibility = View.GONE
+        }
+    }
 }
