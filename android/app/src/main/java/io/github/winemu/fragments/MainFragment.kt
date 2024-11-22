@@ -163,7 +163,7 @@ class MainFragment : Fragment() {
 
         private fun setupContainerFab() {
             (requireActivity() as MainActivity).findViewById<ExtendedFloatingActionButton>(R.id.create_container).setOnClickListener {
-                PreferenceActivity.launch(requireContext(), ContainerDetailFragment::class.java))
+                PreferenceActivity.launch(requireContext(), ContainerDetailFragment::class.java)
             }
         }
 }
