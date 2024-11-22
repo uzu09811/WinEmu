@@ -5,6 +5,9 @@ import androidx.preference.Preference
 import io.github.winemu.preferences.IntegerListPreference
 import androidx.preference.SwitchPreferenceCompat
 import com.win_lib.container.Container
+import com.win_lib.core.WineInfo
+import com.win_lib.box86_64.Box86_64Preset;
+import com.win_lib.box86_64.Box86_64PresetManager
 import io.github.winemu.R
 import io.github.winemu.MainActivity
 import io.github.winemu.PreferenceActivity
@@ -12,6 +15,7 @@ import io.github.winemu.fragments.BasePreferenceFragment
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.Locale
 
 class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment.OnIntegerValueChangeListener {
 
@@ -70,7 +74,10 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun configureData() {
-	data.put("name", name)
+	val type: WineThemeManager.BackgroundType = WineThemeManager.BackgroundType.values()[0]
+        val theme: WineThemeManager.Theme = WineThemeManager.Theme.values()[0]
+        val desktopTheme: String = theme+","+type+","+"FFFF00"
+	data.put("name", "test")
         data.put("screenSize", Container.DEFAULT_SCREEN_SIZE)
         data.put("envVars", Container.DEFAULT_ENV_VARS)
         data.put("cpuList", Container.getFallbackCPUList())
@@ -85,13 +92,13 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("inputType", finalInputType)
         data.put("wow64Mode", wow64Mode)
         data.put("startupSelection", Container.STARTUP_SELECTION_ESSENTIAL)
-        data.put("box86Preset", box86Preset)
-        data.put("box64Preset", box64Preset)
+        data.put("box86Preset", Box86_64Preset.COMPATIBILITY)
+        data.put("box64Preset", Box86_64Preset.COMPATIBILITY)
         data.put("desktopTheme", desktopTheme)
-        data.put("rcfileId", rcfileId)
+        data.put("rcfileId", 0)
         data.put("midiSoundFont", midiSoundFont)
-        data.put("lc_all", lc_all)
-        data.put("primaryController", primaryController)
+        data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
+        data.put("primaryController", 0)
         data.put("controllerMapping", controllerMapping)
         data.put("wineVersion", WineInfo.MAIN_WINE_VERSION)
     }
