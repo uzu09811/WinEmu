@@ -16,6 +16,7 @@ import io.github.winemu.R
 import io.github.winemu.MainActivity
 import io.github.winemu.PreferenceActivity
 import io.github.winemu.fragments.BasePreferenceFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
