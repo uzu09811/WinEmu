@@ -45,6 +45,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".PreferenceActivity"
+            android:launchMode="standard"
+            android:configChanges="screenSize|screenLayout|orientation|density"/>
+
         <!-- Add the required activities from the AAR -->
         <activity
             android:name="com.win_lib.MainActivity"
