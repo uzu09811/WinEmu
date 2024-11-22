@@ -7,6 +7,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.win_lib.container.Container
 import io.github.winemu.R
 import io.github.winemu.MainActivity
+import io.github.winemu.PreferenceActivity
 import io.github.winemu.fragments.BasePreferenceFragment
 
 class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment.OnIntegerValueChangeListener {
