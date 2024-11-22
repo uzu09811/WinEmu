@@ -74,12 +74,4 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
-    fun setToolbarVisibility(visible: Boolean) {
-        if (visible) {
-            binding.appBarLayout.visibility = View.VISIBLE
-        } else {
-            binding.appBarLayout.visibility = View.GONE
-        }
-    }
 }
