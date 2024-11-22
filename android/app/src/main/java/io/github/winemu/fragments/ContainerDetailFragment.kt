@@ -9,6 +9,8 @@ import com.win_lib.core.WineInfo
 import com.win_lib.box86_64.Box86_64Preset;
 import com.win_lib.box86_64.Box86_64PresetManager
 import com.win_lib.core.WineThemeManager
+import com.win_lib.core.WineRegistryEditor
+import com.win_lib.core.FileUtils
 import io.github.winemu.R
 import io.github.winemu.MainActivity
 import io.github.winemu.PreferenceActivity
@@ -120,6 +122,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 	    val registryEditor: WineRegistryEditor = WineRegistryEditor(userRegFile)
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "csmt", 0)
             try {
+		val gpuCards = JSONArray(FileUtils.readString(requireContext(), "gpu_cards.json"))
                 val gpuName: JSONObject = gpuCards.getJSONObject(0)
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciDeviceID", gpuName.getInt("deviceID"))
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciVendorID", gpuName.getInt("vendorID"))
