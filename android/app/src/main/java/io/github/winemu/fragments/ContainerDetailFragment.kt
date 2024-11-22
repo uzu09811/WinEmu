@@ -115,11 +115,11 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun saveWineRegistryKeys() {
-        File userRegFile = File(container.getRootDir(), ".wine/user.reg")
+        val userRegFile: File = File(container.getRootDir(), ".wine/user.reg")
         try (WineRegistryEditor registryEditor = WineRegistryEditor(userRegFile)) {
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "csmt", 0)
             try {
-                JSONObject gpuName = gpuCards.getJSONObject(0)
+                val gpuName: JSONObject = gpuCards.getJSONObject(0)
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciDeviceID", gpuName.getInt("deviceID"))
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciVendorID", gpuName.getInt("vendorID"))
             }
