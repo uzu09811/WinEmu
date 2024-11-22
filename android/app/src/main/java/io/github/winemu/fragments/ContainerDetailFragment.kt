@@ -17,6 +17,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.Locale
+import java.io.File
 
 class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment.OnIntegerValueChangeListener {
 
@@ -99,5 +100,36 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("primaryController", 0)
         data.put("controllerMapping", "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000")
         data.put("wineVersion", WineInfo.MAIN_WINE_VERSION)
+    }
+
+    private fun configureFab() {
+	(requireActivity() as PreferenceActivity).findViewById<FloatingActionButton>(R.id.doneFab).setOnClickListener {
+	    manager.createContainerAsync(data, (container) -> {
+                if (container != null) {
+                    this.container = container
+                    saveWineRegistryKeys()
+                }
+                requireActivity().onBackPressed()
+            })
+	}
+    }
+
+    private fun saveWineRegistryKeys() {
+        File userRegFile = File(container.getRootDir(), ".wine/user.reg")
+        try (WineRegistryEditor registryEditor = WineRegistryEditor(userRegFile)) {
+            registryEditor.setDwordValue("Software\\Wine\\Direct3D", "csmt", 0)
+            try {
+                JSONObject gpuName = gpuCards.getJSONObject(0)
+                registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciDeviceID", gpuName.getInt("deviceID"))
+                registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciVendorID", gpuName.getInt("vendorID"))
+            }
+            catch (JSONException e) {}   
+            registryEditor.setStringValue("Software\\Wine\\Direct3D", "OffScreenRenderingMode", "fbo")
+            registryEditor.setDwordValue("Software\\Wine\\Direct3D", "strict_shader_math", 1)
+            registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", 4096)
+            registryEditor.setStringValue("Software\\Wine\\DirectInput", "MouseWarpOverride", "disable")
+            registryEditor.setStringValue("Software\\Wine\\Direct3D", "shader_backend", "glsl")
+            registryEditor.setStringValue("Software\\Wine\\Direct3D", "UseGLSL", "enabled")
+        }
     }
 }
