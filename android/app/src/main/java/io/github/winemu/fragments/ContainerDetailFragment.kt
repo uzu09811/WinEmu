@@ -85,7 +85,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("cpuListWoW64", Container.getFallbackCPUListWoW64())
         data.put("graphicsDriver", Container.DEFAULT_GRAPHICS_DRIVER)
         data.put("dxwrapper", Container.DEFAULT_DXWRAPPER)
-        data.put("dxwrapperConfig", dxwrapperConfig)
+        data.put("dxwrapperConfig", "")
         data.put("audioDriver", Container.DEFAULT_AUDIO_DRIVER)
         data.put("wincomponents", Container.DEFAULT_WINCOMPONENTS)
         data.put("drives", Container.DEFAULT_DRIVES)
