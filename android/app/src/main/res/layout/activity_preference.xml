@@ -26,12 +26,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/doneFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:icon="@drawable/check_24px"
+        app:srcCompat="@drawable/check_24px"
         android:layout_gravity="end|bottom" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
