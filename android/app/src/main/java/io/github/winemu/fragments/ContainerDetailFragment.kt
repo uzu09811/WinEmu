@@ -5,6 +5,7 @@ import androidx.preference.Preference
 import io.github.winemu.preferences.IntegerListPreference
 import androidx.preference.SwitchPreferenceCompat
 import com.win_lib.container.Container
+import com.win_lib.container.Container
 import com.win_lib.core.WineInfo
 import com.win_lib.box86_64.Box86_64Preset;
 import com.win_lib.box86_64.Box86_64PresetManager
@@ -106,7 +107,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     private fun configureFab() {
 	(requireActivity() as PreferenceActivity).findViewById<FloatingActionButton>(R.id.doneFab).setOnClickListener {
-	    manager.createContainerAsync(data, (container) -> {
+	    ContainerManager(requiredContext()).createContainerAsync(data, (container) -> {
                 if (container != null) {
                     this.container = container
                     saveWineRegistryKeys()
@@ -130,7 +131,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
             catch (JSONException e) {}   
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "OffScreenRenderingMode", "fbo")
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "strict_shader_math", 1)
-            registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", 4096)
+            registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", "4096")
             registryEditor.setStringValue("Software\\Wine\\DirectInput", "MouseWarpOverride", "disable")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "shader_backend", "glsl")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "UseGLSL", "enabled")
