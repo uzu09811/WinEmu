@@ -8,6 +8,7 @@ import com.win_lib.container.Container
 import com.win_lib.core.WineInfo
 import com.win_lib.box86_64.Box86_64Preset;
 import com.win_lib.box86_64.Box86_64PresetManager
+import com.win_lib.core.WineThemeManager
 import io.github.winemu.R
 import io.github.winemu.MainActivity
 import io.github.winemu.PreferenceActivity
@@ -89,17 +90,17 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("wincomponents", Container.DEFAULT_WINCOMPONENTS)
         data.put("drives", Container.DEFAULT_DRIVES)
         data.put("showFPS", true)
-        data.put("inputType", finalInputType)
-        data.put("wow64Mode", wow64Mode)
+        data.put("inputType", 0)
+        data.put("wow64Mode", true)
         data.put("startupSelection", Container.STARTUP_SELECTION_ESSENTIAL)
         data.put("box86Preset", Box86_64Preset.COMPATIBILITY)
         data.put("box64Preset", Box86_64Preset.COMPATIBILITY)
         data.put("desktopTheme", desktopTheme)
         data.put("rcfileId", 0)
-        data.put("midiSoundFont", midiSoundFont)
+        data.put("midiSoundFont", "")
         data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
         data.put("primaryController", 0)
-        data.put("controllerMapping", controllerMapping)
+        data.put("controllerMapping", "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000")
         data.put("wineVersion", WineInfo.MAIN_WINE_VERSION)
     }
 }
