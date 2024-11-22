@@ -27,6 +27,7 @@ import io.github.winemu.databinding.MainFragmentBinding
 import io.github.winemu.adapters.ContainerAdapter
 import io.github.winemu.fragments.ContainerDetailFragment
 import io.github.winemu.MainActivity
+import io.github.winemu.PreferenceActivity
 import com.win_lib.container.ContainerManager
 import com.win_lib.container.Container
 import com.win_lib.XrActivity
@@ -162,10 +163,7 @@ class MainFragment : Fragment() {
 
         private fun setupContainerFab() {
             (requireActivity() as MainActivity).findViewById<ExtendedFloatingActionButton>(R.id.create_container).setOnClickListener {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, ContainerDetailFragment(), "CONTAINER_DETAIL_FRAGMENT_TAG")
-                    .addToBackStack(null)
-                    .commit()
+                PreferenceActivity.launch(requireContext(), ContainerDetailFragment::class.java))
             }
         }
 }
