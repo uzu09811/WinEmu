@@ -75,9 +75,6 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun configureData() {
-	val type: WineThemeManager.BackgroundType = WineThemeManager.BackgroundType.values()[0]
-        val theme: WineThemeManager.Theme = WineThemeManager.Theme.values()[0]
-        val desktopTheme: String = theme+","+type+","+"FFFF00"
 	data.put("name", "test")
         data.put("screenSize", Container.DEFAULT_SCREEN_SIZE)
         data.put("envVars", Container.DEFAULT_ENV_VARS)
@@ -95,7 +92,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("startupSelection", Container.STARTUP_SELECTION_ESSENTIAL)
         data.put("box86Preset", Box86_64Preset.COMPATIBILITY)
         data.put("box64Preset", Box86_64Preset.COMPATIBILITY)
-        data.put("desktopTheme", desktopTheme)
+        data.put("desktopTheme", WineThemeManager.DEFAULT_DESKTOP_THEME)
         data.put("rcfileId", 0)
         data.put("midiSoundFont", "")
         data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
