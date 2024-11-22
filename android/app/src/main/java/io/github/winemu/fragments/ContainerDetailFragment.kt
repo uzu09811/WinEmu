@@ -36,7 +36,6 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     override fun onDestroyView() {
 	super.onDestroyView()
-        (requireActivity() as MainActivity).setToolbarVisibility(false)
     }
 	    
     private fun refresh() {
@@ -61,9 +60,6 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun configureToolbar() {
-        (requireActivity() as MainActivity).setSupportActionBar((requireActivity() as MainActivity).findViewById(R.id.toolbar))
-	(requireActivity() as MainActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        (requireActivity() as MainActivity).getSupportActionBar()?.title = "New Container"
-        (requireActivity() as MainActivity).setToolbarVisibility(true)
+        (requireActivity() as PreferenceActivity).getSupportActionBar()?.title = "New Container" // TODO: use resources string so that can be transalated later
     }
 }
