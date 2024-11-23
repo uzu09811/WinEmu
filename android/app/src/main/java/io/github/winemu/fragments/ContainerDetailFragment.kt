@@ -108,7 +108,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     private fun configureFab() {
 	(requireActivity() as PreferenceActivity).findViewById<FloatingActionButton>(R.id.doneFab).setOnClickListener {
-	    ContainerManager(requireContext()).createContainerAsync(data, (container) -> {
+	    ContainerManager(requireContext()).createContainerAsync(data) { container ->
                 if (container != null) {
                     this.container = container
                     saveWineRegistryKeys()
@@ -136,6 +136,6 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
             registryEditor.setStringValue("Software\\Wine\\DirectInput", "MouseWarpOverride", "disable")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "shader_backend", "glsl")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "UseGLSL", "enabled")
-        }
+        } catch (JSONException e) {}
     }
 }
