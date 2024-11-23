@@ -37,6 +37,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         setIntegerValueChangeListener("audio_driver", this)
         refresh()
 	configureData()
+	configureFab()
     }
 
     override fun onValueChanged(key: String, newValue: Int) {
@@ -48,6 +49,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     override fun onResume() {
         super.onResume()
 	configureToolbar()
+	configureFab()
     }
 
     override fun onDestroyView() {
@@ -107,16 +109,21 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun configureFab() {
-	(requireActivity() as PreferenceActivity).findViewById<FloatingActionButton>(R.id.doneFab).setOnClickListener {
-	    ContainerManager(requireContext()).createContainerAsync(data) { container ->
-                if (container != null) {
-                    this.container = container
-                    saveWineRegistryKeys()
+        (requireActivity() as PreferenceActivity).findViewById<FloatingActionButton>(R.id.doneFab).setOnClickListener {
+            val containerManager = ContainerManager(requireContext())
+        
+            containerManager.createContainerAsync(data, object : Callback<Container> {
+                override fun call(container: Container?) {
+                    if (container != null) {
+                        this@ContainerDetailFragment.container = container
+                        saveWineRegistryKeys()
+                    }
+                    requireActivity().onBackPressed()
                 }
-                requireActivity().onBackPressed()
             })
-	}
+        }
     }
+
 
     private fun saveWineRegistryKeys() {
         val userRegFile: File = File(container.getRootDir(), ".wine/user.reg")
