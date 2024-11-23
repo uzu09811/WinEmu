@@ -5,7 +5,7 @@ import androidx.preference.Preference
 import io.github.winemu.preferences.IntegerListPreference
 import androidx.preference.SwitchPreferenceCompat
 import com.win_lib.container.Container
-import com.win_lib.container.Container
+import com.win_lib.container.ContainerManager
 import com.win_lib.core.WineInfo
 import com.win_lib.box86_64.Box86_64Preset;
 import com.win_lib.box86_64.Box86_64PresetManager
@@ -108,7 +108,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     private fun configureFab() {
 	(requireActivity() as PreferenceActivity).findViewById<FloatingActionButton>(R.id.doneFab).setOnClickListener {
-	    ContainerManager(requiredContext()).createContainerAsync(data, (container) -> {
+	    ContainerManager(requireContext()).createContainerAsync(data, (container) -> {
                 if (container != null) {
                     this.container = container
                     saveWineRegistryKeys()
