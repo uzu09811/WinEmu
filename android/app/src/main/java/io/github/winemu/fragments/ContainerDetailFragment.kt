@@ -12,6 +12,7 @@ import com.win_lib.box86_64.Box86_64PresetManager
 import com.win_lib.core.WineThemeManager
 import com.win_lib.core.WineRegistryEditor
 import com.win_lib.core.FileUtils
+import com.win_lib.core.Callback
 import io.github.winemu.R
 import io.github.winemu.MainActivity
 import io.github.winemu.PreferenceActivity
