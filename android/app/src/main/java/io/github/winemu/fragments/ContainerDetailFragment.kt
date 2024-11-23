@@ -106,7 +106,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
         data.put("primaryController", 0)
         data.put("controllerMapping", "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000")
-        data.put("wineVersion", WineInfo.MAIN_WINE_VERSION)
+        data.put("wineVersion", WineInfo.MAIN_WINE_VERSION.identifier())
     }
 
     private fun configureFab() {
