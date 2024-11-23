@@ -136,14 +136,13 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
                 val gpuName: JSONObject = gpuCards.getJSONObject(0)
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciDeviceID", gpuName.getInt("deviceID"))
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciVendorID", gpuName.getInt("vendorID"))
-            }
-            catch (JSONException e) {}   
+            } catch (e: JSONException) {}   
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "OffScreenRenderingMode", "fbo")
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "strict_shader_math", 1)
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", "4096")
             registryEditor.setStringValue("Software\\Wine\\DirectInput", "MouseWarpOverride", "disable")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "shader_backend", "glsl")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "UseGLSL", "enabled")
-        } catch (JSONException e) {}
+        } catch (e: JSONException) {}
     }
 }
