@@ -27,7 +27,7 @@
 -keep class h2.a { *; }
 
 -keep class io.github.winemu.** {*;}
--keep class com.winlator.** {*;}
+-keep class com.win_lib.** {*;}
 
 -keep class io.ktor.** { *; }
 -dontwarn io.ktor.**
