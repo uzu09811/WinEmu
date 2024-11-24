@@ -37,3 +37,16 @@
 -dontwarn org.apache.commons.compress.**
 -keep class org.apache.commons.compress.archivers.** { *; }
 -keep class org.apache.commons.compress.compressors.** { *; }
+
+# Keep the ZstdInputStreamNoFinalizer class
+-keep class com.github.luben.zstd.ZstdInputStreamNoFinalizer { *; }
+
+# Keep native methods if any
+-keepclasseswithmembers class * {
+    native <methods>;
+}
+
+# Keep reflection-accessed fields
+-keepclassmembers class com.github.luben.zstd.ZstdInputStreamNoFinalizer {
+    *;
+}
