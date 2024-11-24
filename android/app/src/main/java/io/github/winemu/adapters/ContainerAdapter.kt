@@ -30,11 +30,11 @@ class ContainerAdapter(
 
     override fun onBindViewHolder(holder: ContainerViewHolder, position: Int) {
         val item = items[position]
-        //holder.icon.setImageResource(item.iconResId) // Set the icon
-        holder.title.text = item.getName()               // Set the title
+        holder.icon.setImageResource(R.drawable.container_icon)
+        holder.title.text = item.getName()
 
         // Handle item click
-        holder.card.setOnClickListener {
+        holder.view.setOnClickListener {
             onItemClick(item)
         }
     }
