@@ -21,6 +21,7 @@ class ContainerAdapter(
         val icon: ImageView = view.findViewById(R.id.containerIcon)
         val title: TextView = view.findViewById(R.id.containerTitle)
         val card: MaterialCardView = view.findViewById(R.id.item_card)
+        val rootView: View = view
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContainerViewHolder {
@@ -34,7 +35,7 @@ class ContainerAdapter(
         holder.title.text = item.getName()
 
         // Handle item click
-        holder.view.setOnClickListener {
+        holder.rootView.setOnClickListener {
             onItemClick(item)
         }
     }
