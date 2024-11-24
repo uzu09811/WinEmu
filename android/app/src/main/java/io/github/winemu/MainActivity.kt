@@ -42,6 +42,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
 
+    init {
+        try {
+            System.loadLibrary("winlator")
+        } catch (e: UnsatisfiedLinkError) {
+            Log.error("[NativeLibrary] $e")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
