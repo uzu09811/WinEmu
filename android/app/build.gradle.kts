@@ -92,6 +92,7 @@ dependencies {
     implementation(files("libs/win-debug.aar"))
     implementation("org.apache.commons:commons-compress:1.20")
     implementation("org.tukaani:xz:1.7")
+    implementation("com.github.luben:zstd-jni:1.5.2-3@aar")
 }
 
 fun getVersionName(): String {
