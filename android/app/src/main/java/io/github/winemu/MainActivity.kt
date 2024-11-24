@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         try {
             System.loadLibrary("winlator")
         } catch (e: UnsatisfiedLinkError) {
-            Log.error("[NativeLibrary] $e")
+            Log.e("[NativeLibrary] $e")
         }
     }
 
