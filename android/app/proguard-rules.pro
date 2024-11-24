@@ -28,6 +28,7 @@
 
 -keep class io.github.winemu.** {*;}
 -keep class com.win_lib.** {*;}
+-keepclasseswithmembers class com.win_lib.** { *; }
 
 -keep class io.ktor.** { *; }
 -dontwarn io.ktor.**
