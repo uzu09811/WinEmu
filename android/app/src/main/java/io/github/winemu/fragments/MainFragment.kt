@@ -83,6 +83,7 @@ class MainFragment : Fragment() {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putBoolean("enable_wine_debug", true) // enable logs
         editor.putBoolean("enable_box86_64_logs", true)      
+        editor.apply()
         refreshContainers()
 
         return binding.root
