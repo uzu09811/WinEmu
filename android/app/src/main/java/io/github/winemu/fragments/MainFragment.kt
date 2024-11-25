@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Base64
 import android.view.LayoutInflater
+import android.content.SharedPreferences
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
@@ -77,7 +78,10 @@ class MainFragment : Fragment() {
         setupContainerFab()
 
         setInsets()
-            
+
+        val editor: SharedPreferences.Editor = PreferenceManager.getDefaultSharedPreferences(requireContext()).edit()
+        editor.putBoolean("enable_wine_debug", true) // enable logs
+        editor.putBoolean("enable_box86_64_logs", true)      
         refreshContainers()
 
         return binding.root
