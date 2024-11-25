@@ -79,7 +79,8 @@ class MainFragment : Fragment() {
 
         setInsets()
 
-        val editor: SharedPreferences.Editor = PreferenceManager.getDefaultSharedPreferences(requireContext()).edit()
+        val sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putBoolean("enable_wine_debug", true) // enable logs
         editor.putBoolean("enable_box86_64_logs", true)      
         refreshContainers()
