@@ -105,7 +105,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("midiSoundFont", "")
         data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
         data.put("primaryController", 1)
-        data.put("controllerMapping", "&85\u001dA$otqr")
+        data.put("controllerMapping", "&85\u001dA\$otqr")
         data.put("wineVersion", WineInfo.MAIN_WINE_VERSION.identifier())
     }
 
