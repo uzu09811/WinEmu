@@ -1,6 +1,7 @@
 package io.github.winemu.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.preference.Preference
 import io.github.winemu.preferences.IntegerListPreference
 import androidx.preference.SwitchPreferenceCompat
@@ -83,30 +84,32 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
     }
 
     private fun configureData() {
-	data.put("name", "test")
-        data.put("screenSize", Container.DEFAULT_SCREEN_SIZE)
-        data.put("envVars", Container.DEFAULT_ENV_VARS)
-        data.put("cpuList", Container.getFallbackCPUList())
-        data.put("cpuListWoW64", Container.getFallbackCPUListWoW64())
-        data.put("graphicsDriver", "turnip-24.1.0")
-        data.put("dxwrapper", Container.DEFAULT_DXWRAPPER)
-        data.put("dxwrapperConfig", "")
-        data.put("audioDriver", Container.DEFAULT_AUDIO_DRIVER)
-        data.put("wincomponents", Container.DEFAULT_WINCOMPONENTS)
-        data.put("drives", Container.DEFAULT_DRIVES)
-        data.put("showFPS", true)
-        data.put("inputType", 6)
-        data.put("wow64Mode", true)
-        data.put("startupSelection", Container.STARTUP_SELECTION_ESSENTIAL)
-        data.put("box86Preset", Box86_64Preset.COMPATIBILITY)
-        data.put("box64Preset", Box86_64Preset.COMPATIBILITY)
-        data.put("desktopTheme", WineThemeManager.DEFAULT_DESKTOP_THEME + ",0")
-        data.put("rcfileId", 0)
-        data.put("midiSoundFont", "")
-        data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
-        data.put("primaryController", 1)
-        data.put("controllerMapping", "&85\u001dA\$otqr")
-        data.put("wineVersion", WineInfo.MAIN_WINE_VERSION.identifier())
+        try {
+	    data.put("name", "test")
+            data.put("screenSize", Container.DEFAULT_SCREEN_SIZE)
+            data.put("envVars", Container.DEFAULT_ENV_VARS)
+            data.put("cpuList", Container.getFallbackCPUList())
+            data.put("cpuListWoW64", Container.getFallbackCPUListWoW64())
+            data.put("graphicsDriver", "turnip-24.1.0")
+            data.put("dxwrapper", Container.DEFAULT_DXWRAPPER)
+            data.put("dxwrapperConfig", "")
+            data.put("audioDriver", Container.DEFAULT_AUDIO_DRIVER)
+            data.put("wincomponents", Container.DEFAULT_WINCOMPONENTS)
+            data.put("drives", Container.DEFAULT_DRIVES)
+            data.put("showFPS", true)
+            data.put("inputType", 6)
+            data.put("wow64Mode", true)
+            data.put("startupSelection", Container.STARTUP_SELECTION_ESSENTIAL)
+            data.put("box86Preset", Box86_64Preset.COMPATIBILITY)
+            data.put("box64Preset", Box86_64Preset.COMPATIBILITY)
+            data.put("desktopTheme", WineThemeManager.DEFAULT_DESKTOP_THEME + ",0")
+            data.put("rcfileId", 0)
+            data.put("midiSoundFont", "")
+            data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
+            data.put("primaryController", 1)
+            data.put("controllerMapping", "&85\u001dA\$otqr")
+            data.put("wineVersion", WineInfo.MAIN_WINE_VERSION.identifier())
+	} catch (e: JSONException) { e.printStackTrace() } 
     }
 
     private fun configureFab() {
@@ -118,6 +121,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
                     if (container != null) {
                         this@ContainerDetailFragment.container = container
                         saveWineRegistryKeys()
+			Log.e("ContainerDetailFragment", "Container is null")
                     }
                     requireActivity().onBackPressed()
                 }
@@ -136,13 +140,13 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
                 val gpuName: JSONObject = gpuCards.getJSONObject(0)
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciDeviceID", gpuName.getInt("deviceID"))
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciVendorID", gpuName.getInt("vendorID"))
-            } catch (e: JSONException) {}   
+            } catch (e: JSONException) { e.printStackTrace()}   
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "OffScreenRenderingMode", "fbo")
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "strict_shader_math", 1)
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", "4096")
             registryEditor.setStringValue("Software\\Wine\\DirectInput", "MouseWarpOverride", "disable")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "shader_backend", "glsl")
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "UseGLSL", "enabled")
-        } catch (e: JSONException) {}
+        } catch (e: JSONException) { e.printStackTrace() }
     }
 }
