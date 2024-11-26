@@ -100,7 +100,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         data.put("startupSelection", Container.STARTUP_SELECTION_ESSENTIAL)
         data.put("box86Preset", Box86_64Preset.COMPATIBILITY)
         data.put("box64Preset", Box86_64Preset.COMPATIBILITY)
-        data.put("desktopTheme", WineThemeManager.DEFAULT_DESKTOP_THEME)
+        data.put("desktopTheme", WineThemeManager.DEFAULT_DESKTOP_THEME + ",0")
         data.put("rcfileId", 0)
         data.put("midiSoundFont", "")
         data.put("lc_all", Locale.getDefault().getLanguage() + '_' + Locale.getDefault().getCountry() + ".UTF-8")
