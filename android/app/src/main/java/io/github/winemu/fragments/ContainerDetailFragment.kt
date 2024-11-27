@@ -121,7 +121,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
                     if (container != null) {
                         this@ContainerDetailFragment.container = container
                         saveWineRegistryKeys()
-			Log.e("ContainerDetailFragment", "Container is null")
+			Log.e("ContainerDetailFragment", "Container is Successfully created")
                     }
                     requireActivity().onBackPressed()
                 }
@@ -132,6 +132,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     private fun saveWineRegistryKeys() {
         val userRegFile: File = File(container.getRootDir(), ".wine/user.reg")
+	Log.e("ContainerDetailFragment", userRegFile.absolutePath)
         try {
 	    val registryEditor: WineRegistryEditor = WineRegistryEditor(userRegFile)
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "csmt", 0)
@@ -140,7 +141,7 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
                 val gpuName: JSONObject = gpuCards.getJSONObject(0)
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciDeviceID", gpuName.getInt("deviceID"))
                 registryEditor.setDwordValue("Software\\Wine\\Direct3D", "VideoPciVendorID", gpuName.getInt("vendorID"))
-            } catch (e: JSONException) { e.printStackTrace()}   
+            } catch (e: JSONException) { e.printStackTrace() }   
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "OffScreenRenderingMode", "fbo")
             registryEditor.setDwordValue("Software\\Wine\\Direct3D", "strict_shader_math", 1)
             registryEditor.setStringValue("Software\\Wine\\Direct3D", "VideoMemorySize", "4096")
