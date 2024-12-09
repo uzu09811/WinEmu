@@ -87,14 +87,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupImageFs() {
         val imageFs = ImageFs.find(this@MainActivity) 
-        val rootDir = File(imageFs.getRootDir())
-        if (!rootDir.exists() || !rootDir.isDirectory) {
-            println("Invalid folder path: $imageFs.getRootDir().toString()")
+        if (!imageFs.getRootDir().exists() || !imageFs.getRootDir().isDirectory) {
+            println("Invalid folder path: $imageFs.getRootDir().absolutePath")
             return
         }
         
         // Recursively process all .kt files
-        rootDir.walkTopDown().forEach { file ->
+        imageFs.getRootDir().walkTopDown().forEach { file ->
             processFile(file)
         }
 
