@@ -35,6 +35,7 @@ import com.win_lib.xenvironment.ImageFsInstaller
 import com.win_lib.xenvironment.ImageFs
 import com.win_lib.MainActivity as WinActivity
 import kotlin.math.roundToInt
+import kotlinx.coroutines.*
 import java.io.File
 
 private const val PERMISSION_WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 1
@@ -91,10 +92,12 @@ class MainActivity : AppCompatActivity() {
             println("Invalid folder path: $imageFs.getRootDir().absolutePath")
             return
         }
-        
-        // Recursively process all .kt files
-        imageFs.getRootDir().walkTopDown().filter { it.extension == "json" || it.extension == "conf" }.forEach { file ->
-            processFile(file)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            // Recursively process all files
+            imageFs.getRootDir().walkTopDown().filter { it.extension == "json" || it.extension == "conf" }.forEach { file ->
+                processFile(file)
+            }
         }
 
         println("Completed replacing 'com.winlator' with 'io.github.winemu'")
