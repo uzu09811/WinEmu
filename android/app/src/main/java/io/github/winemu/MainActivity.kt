@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
         
         // Recursively process all .kt files
-        imageFs.getRootDir().walkTopDown().forEach { file ->
+        imageFs.getRootDir().walkTopDown().filter { it.extension == "json" || it.extension == "conf" }.forEach { file ->
             processFile(file)
         }
 
