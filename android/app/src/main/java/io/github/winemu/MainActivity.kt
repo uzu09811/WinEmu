@@ -32,6 +32,7 @@ import io.github.winemu.R
 import io.github.winemu.fragments.MainFragment
 import io.github.winemu.databinding.MainActivityBinding
 import com.win_lib.xenvironment.ImageFsInstaller
+import com.win_lib.xenvironment.ImageFs
 import com.win_lib.MainActivity as WinActivity
 import kotlin.math.roundToInt
 import java.io.File
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         if (!requestAppPermissions()) ImageFsInstaller.installIfNeeded(this)
+        setupImageFs()
     }
 
     private fun requestAppPermissions(): Boolean {
@@ -80,6 +82,35 @@ class MainActivity : AppCompatActivity() {
             )
             ActivityCompat.requestPermissions(this, permissions, PERMISSION_WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
             true
+        }
+    }
+
+    private fun setupImageFs() {
+        val imageFs = ImageFs.find(this@MainActivity) 
+        val rootDir = File(imageFs.getRootDir())
+        if (!rootDir.exists() || !rootDir.isDirectory) {
+            println("Invalid folder path: $imageFs.getRootDir().toString()")
+            return
+        }
+        
+        // Recursively process all .kt files
+        rootDir.walkTopDown().forEach { file ->
+            processFile(file)
+        }
+
+        println("Completed replacing 'com.winlator' with 'io.github.winemu'")
+    }
+
+    fun processFile(file: File) {
+        try {
+            val content = file.readText()
+            if ("com.winlator" in content) {
+                val updatedContent = content.replace("com.winlator", "io.github.winemu")
+                file.writeText(updatedContent)
+                println("Updated: ${file.path}")
+            }
+        } catch (e: Exception) {
+            println("Error processing file ${file.path}: ${e.message}")
         }
     }
 }
