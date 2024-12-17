@@ -23,6 +23,7 @@
     <uses-feature android:name="oculus.software.overlay_keyboard" android:required="false" />
 
     <application
+        android:process="com.winlator" 
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

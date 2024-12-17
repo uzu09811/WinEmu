@@ -31,9 +31,9 @@ import com.google.android.material.color.MaterialColors
 import io.github.winemu.R
 import io.github.winemu.fragments.MainFragment
 import io.github.winemu.databinding.MainActivityBinding
-import com.win_lib.xenvironment.ImageFsInstaller
-import com.win_lib.xenvironment.ImageFs
-import com.win_lib.MainActivity as WinActivity
+import com.winlator.xenvironment.ImageFsInstaller
+import com.winlator.xenvironment.ImageFs
+import com.winlator.MainActivity as WinActivity
 import kotlin.math.roundToInt
 import kotlinx.coroutines.*
 import java.io.File
@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         if (!requestAppPermissions()) ImageFsInstaller.installIfNeeded(this)
-        setupImageFs()
     }
 
     private fun requestAppPermissions(): Boolean {
@@ -83,36 +82,6 @@ class MainActivity : AppCompatActivity() {
             )
             ActivityCompat.requestPermissions(this, permissions, PERMISSION_WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
             true
-        }
-    }
-
-    private fun setupImageFs() {
-        val imageFs = ImageFs.find(this@MainActivity) 
-        if (!imageFs.getRootDir().exists() || !imageFs.getRootDir().isDirectory) {
-            println("Invalid folder path: $imageFs.getRootDir().absolutePath")
-            return
-        }
-
-        CoroutineScope(Dispatchers.IO).launch {
-            // Recursively process all files
-            imageFs.getRootDir().walkTopDown().filter { it.extension == "json" || it.extension == "conf" }.forEach { file ->
-                processFile(file)
-            }
-        }
-
-        println("Completed replacing 'com.winlator' with 'io.github.winemu'")
-    }
-
-    fun processFile(file: File) {
-        try {
-            val content = file.readText()
-            if ("com.winlator" in content) {
-                val updatedContent = content.replace("com.winlator", "io.github.winemu")
-                file.writeText(updatedContent)
-                println("Updated: ${file.path}")
-            }
-        } catch (e: Exception) {
-            println("Error processing file ${file.path}: ${e.message}")
         }
     }
 }

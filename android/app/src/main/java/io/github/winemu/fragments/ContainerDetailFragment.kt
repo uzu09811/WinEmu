@@ -5,15 +5,15 @@ import android.util.Log
 import androidx.preference.Preference
 import io.github.winemu.preferences.IntegerListPreference
 import androidx.preference.SwitchPreferenceCompat
-import com.win_lib.container.Container
-import com.win_lib.container.ContainerManager
-import com.win_lib.core.WineInfo
-import com.win_lib.box86_64.Box86_64Preset;
-import com.win_lib.box86_64.Box86_64PresetManager
-import com.win_lib.core.WineThemeManager
-import com.win_lib.core.WineRegistryEditor
-import com.win_lib.core.FileUtils
-import com.win_lib.core.Callback
+import com.winlator.container.Container
+import com.winlator.container.ContainerManager
+import com.winlator.core.WineInfo
+import com.winlator.box86_64.Box86_64Preset;
+import com.winlator.box86_64.Box86_64PresetManager
+import com.winlator.core.WineThemeManager
+import com.winlator.core.WineRegistryEditor
+import com.winlator.core.FileUtils
+import com.winlator.core.Callback
 import io.github.winemu.R
 import io.github.winemu.MainActivity
 import io.github.winemu.PreferenceActivity
@@ -38,8 +38,8 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         setIntegerValueChangeListener("graphics_driver", this)
         setIntegerValueChangeListener("audio_driver", this)
         refresh()
-	configureData()
-	configureFab()
+	    configureData()
+	    configureFab()
     }
 
     override fun onValueChanged(key: String, newValue: Int) {
@@ -50,12 +50,12 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
 
     override fun onResume() {
         super.onResume()
-	configureToolbar()
-	configureFab()
+	    configureToolbar()
+	    configureFab()
     }
 
     override fun onDestroyView() {
-	super.onDestroyView()
+	    super.onDestroyView()
     }
 	    
     private fun refresh() {

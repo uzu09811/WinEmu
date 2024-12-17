@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import io.github.winemu.R
-import com.win_lib.container.Container
+import com.winlator.container.Container
 
 class ContainerAdapter(
     private val items: List<Container>,
