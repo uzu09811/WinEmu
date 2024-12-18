@@ -12,7 +12,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "io.github.winemu"
+        applicationId = "com.winlator"
         minSdk = 26
         targetSdk = 28
         versionCode = 1
