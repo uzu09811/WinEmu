@@ -38,24 +38,40 @@ class ContainerDetailFragment : BasePreferenceFragment(), BasePreferenceFragment
         setIntegerValueChangeListener("graphics_driver", this)
         setIntegerValueChangeListener("audio_driver", this)
         refresh()
-	    configureData()
-	    configureFab()
+	configureData()
+	configureFab()
     }
 
     override fun onValueChanged(key: String, newValue: Int) {
         when (key) {
-            // implement 
+	    "screen_size" -> {
+	        //TODO: implement logic
+	    }
+	    "graphics_driver" -> {
+		when (newValue) {
+	            0 -> data.put("graphicsDriver", "turnip-24.1.0")
+		    1 -> data.put("graphicsDriver", "virgl-23.1.9")
+		    else -> data.put("graphicsDriver", "turnip-24.1.0")
+		}
+	    }
+	    "audio_driver" -> {
+	        when (newValue) {
+	            0 -> data.put("audioDriver", "alsa")
+		    1 -> data.put("audioDriver", "pulseaudio")
+		    else -> data.put("audioDriver", Container.DEFAULT_AUDIO_DRIVER)
+		}
+	    }
         }
     }
 
     override fun onResume() {
         super.onResume()
-	    configureToolbar()
-	    configureFab()
+	configureToolbar()
+	configureFab()
     }
 
     override fun onDestroyView() {
-	    super.onDestroyView()
+	super.onDestroyView()
     }
 	    
     private fun refresh() {
